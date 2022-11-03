@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>Superhero info</h2>
+<br>
+<form th:method="POST" th:action="@{/user}" th:object="${user}">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" id="name">
+        <br>
+        <label for="lastName">Last Name</label>
+        <input type="text" th:field="*{lastName}" id="lastName">
+        <br>
+        <label for="ability">Ability</label>
+        <input type="text" th:field="*{ability}" id="ability">
+        <br>
+        <label for="alias">Alias</label>
+        <input type="text" th:field="*{alias}" id="alias">
+        <br>
+        <input type="submit" value="I want to be a new Hero!">
+    </div>
+</form>
+</body>
+</html>
