@@ -5,24 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
-import web.service.UserService;
-
-import java.util.List;
+import web.service.UserServiceImp;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImp userServiceImp;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserServiceImp userServiceImp) {
+        this.userServiceImp = userServiceImp;
     }
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("users",userService.findAll());
+        model.addAttribute("users", userServiceImp.findAll());
         return "user";
     }
 
@@ -33,25 +31,25 @@ public class UserController {
 
     @PostMapping
     public String create(User user) {
-        userService.saveUser(user);
+        userServiceImp.saveUser(user);
         return "redirect:/user";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userServiceImp.findById(id));
         return "edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+        userServiceImp.saveUser(user);
         return "redirect:/user";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
-        userService.delete(id);
+        userServiceImp.delete(id);
         return "redirect:/user";
     }
 
